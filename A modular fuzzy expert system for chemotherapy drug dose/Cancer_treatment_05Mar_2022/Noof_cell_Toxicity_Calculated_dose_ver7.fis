@@ -1,0 +1,81 @@
+[System]
+Name='Noof_cell_Toxicity_Calculated_dose_ver7'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=30
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Tumor_Size'
+Range=[-3 11]
+NumMFs=4
+MF1='VS':'trapmf',[-3 -3 -0.5 2.25]
+MF2='S':'trimf',[-0.5 2.25 5]
+MF3='B':'trimf',[3 5.75 8.5]
+MF4='VB':'trapmf',[6 9 11 11]
+
+[Input2]
+Name='Toxicity'
+Range=[0 120]
+NumMFs=5
+MF1='VL':'trapmf',[-27 -3 3 30]
+MF2='L':'trimf',[0 30 60]
+MF3='M':'trimf',[30 60 90]
+MF4='H':'trimf',[60 90 120]
+MF5='VH':'trapmf',[90 117 123 147]
+
+[Input3]
+Name='Calculated_Dose'
+Range=[0 300]
+NumMFs=4
+MF1='LD':'trapmf',[0 0 165 180]
+MF2='ND':'trimf',[165 180 202]
+MF3='OD':'trimf',[184 202 216]
+MF4='VOD':'trapmf',[200 245 300 300]
+
+[Output1]
+Name='Percent__Dose_I'
+Range=[0 0.8]
+NumMFs=4
+MF1='Normal':'trapmf',[0 0 0 0.1]
+MF2='Increase':'trimf',[0.2 0.3 0.4]
+MF3='Very_Increase':'trapmf',[0.35 0.45 0.8 0.8]
+MF4='L_increase':'trimf',[0.05 0.15 0.25]
+
+[Rules]
+1 0 1, 1 (1) : 1
+1 0 2, 4 (1) : 1
+1 0 3, 2 (1) : 1
+1 0 4, 2 (1) : 1
+2 1 1, 1 (1) : 1
+2 1 2, 4 (1) : 1
+2 1 3, 2 (1) : 1
+2 2 1, 1 (1) : 1
+2 2 2, 4 (1) : 1
+2 2 3, 2 (1) : 1
+2 3 1, 1 (1) : 1
+2 3 2, 1 (1) : 1
+2 3 3, 2 (1) : 1
+2 4 0, 1 (1) : 1
+2 5 0, 1 (1) : 1
+3 1 0, 1 (1) : 1
+3 2 0, 1 (1) : 1
+3 3 0, 1 (1) : 1
+3 4 0, 1 (1) : 1
+3 5 0, 1 (1) : 1
+4 1 0, 1 (1) : 1
+4 2 0, 1 (1) : 1
+4 3 1, 1 (1) : 1
+4 3 2, 1 (1) : 1
+4 3 4, 2 (1) : 1
+4 4 0, 1 (1) : 1
+4 5 0, 1 (1) : 1
+2 1 4, 2 (1) : 1
+2 2 4, 2 (1) : 1
+2 3 4, 2 (1) : 1
